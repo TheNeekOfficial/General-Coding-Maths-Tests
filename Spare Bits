@@ -1,0 +1,27 @@
+https://stackoverflow.com/questions/6800193/what-is-the-most-efficient-way-of-finding-all-the-factors-of-a-number-in-python
+Copied from here for factors code
+
+def factors(n):  # Copied from online
+    global factor_list
+    factor_list = list(set(x for tup in ([z, n // z]
+                            for z in range(1, int(n ** 0.5) + 1) if n % z == 0) for x in tup))  # noqa: e128
+    return factor_list
+
+        for value, y, loop in value_to_iter_no.values():  # noqa: E501 Trying to find max value of iterations in first 562, doesn't work
+            if y > 1:
+                print(f'{value} has {y} iterations')
+
+         if i == 561:  # cHOSEN COS FACTOR code stops working at 562 for some reason
+        for value, iters in value_to_iter_no.items():  # Works without loop numbers being stored
+            if iters == max(value_to_iter_no.values()):
+                print(f'{value} has {iters} iterations')
+
+            for value, iters in value_to_iter_no.items():  # Works without loop numbers being stored
+        if value >= 138:
+            if no_of_iters == max(value_to_iter_no.values()):
+                print(f'{value} has {iters} iterations')
+
+
+ if original in value_to_iter_no.keys():  # allows keeping values and no of iterations between runs
+        return print(
+            f"{value_to_iter_no[original]} is the number of iterations this took to reach the end of {original}'s aliquotity")  # noqa: E501
