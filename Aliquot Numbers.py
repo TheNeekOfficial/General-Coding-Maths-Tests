@@ -10,7 +10,7 @@ class Aliquot:
                         1302, 1314, 1320, 1338, 1350, 1356, 1392, 1398, 1410, 1464, 1476, 1488, 1512, 1560, 1572, 1578,
                         1590, 1632, 1650, 1662, 1674, 1722, 1734, 1758, 1770, 1806, 1836]
 
-        # We know it ends just too big for me to test program, change if want
+        # We know it ends just too big for me to test program, change if you want
         self.avoid = [702, 840, 978, 990, 1062, 1248, 1266, 1278]
 
         self.no_of_iters = 0
