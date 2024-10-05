@@ -1,3 +1,7 @@
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+
 class PrimeChecker:
     def __init__(self):
         self.seen = set()
@@ -33,7 +37,7 @@ class PrimeChecker:
             assert TypeError
         self.seen.add(i)
 
-        for p in range(1, i+1):
+        for p in range(1, int(i) + 1):  # changed to int(i**0.5)+1 to check faster, use this for sns view
             factor_list = self.factors(p)
             if factor_list == [1, p]:
                 self.primeset.add(p)
@@ -41,12 +45,24 @@ class PrimeChecker:
             else:
                 self.primeDict[p] = 'No'
 
-        if self.primeDict[i] == 'Yes':
-            return_text = '{} {} is prime'.format(self.primeDict[i], i)
-        else:
-            return_text = '{} {} is not prime'.format(self.primeDict[i], i)
+        for p in self.primeset:  # Useful for faster checking using method above
+            if i % p == 0:
+                self.primeDict[i] = 'No'
+                return_text = '{} {} is not prime'.format(self.primeDict[i], i)
+        #                return return_text
+        #                return print(self.primeDict, '\n', sorted(self.primeset), '\n', return_text)
 
-        return print(self.primeDict, '\n', sorted(self.primeset), '\n', return_text)
+        self.primeset.add(i)
+        self.primeDict[i] = 'Yes'
+        return_text = '{} {} is prime'.format(self.primeDict[i], i)
+
+        return sorted(self.primeset)
 
 
-PrimeChecker().PrimeCheck(100007)
+#        return return_text  # useful for testing one prime and not all beneath, same with below
+#        return print(self.primeDict, '\n', sorted(self.primeset), '\n', return_text)
+
+checker = PrimeChecker().PrimeCheck
+result = checker(10 ** 6)
+sns.histplot(data=result, bins=1)  # Shows primes within of result and their distributions
+plt.show()
