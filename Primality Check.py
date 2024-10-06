@@ -25,7 +25,7 @@ class PrimeChecker:
                 factor_list.add(n // z)
         return sorted(factor_list)
 
-    def PrimeCheck(self, i):
+    def PrimeCheck(self, i, fast=False):
 
         if i in self.seen:
             return print(self.primeDict[i])
@@ -37,32 +37,49 @@ class PrimeChecker:
             assert TypeError
         self.seen.add(i)
 
-        for p in range(1, int(i) + 1):  # changed to int(i**0.5)+1 to check faster, use this for sns view
-            factor_list = self.factors(p)
-            if factor_list == [1, p]:
-                self.primeset.add(p)
-                self.primeDict[p] = 'Yes'
-            else:
-                self.primeDict[p] = 'No'
+        if fast:
 
-        for p in self.primeset:  # Useful for faster checking using method above
-            if i % p == 0:
-                self.primeDict[i] = 'No'
-                return_text = '{} {} is not prime'.format(self.primeDict[i], i)
-        #                return return_text
-        #                return print(self.primeDict, '\n', sorted(self.primeset), '\n', return_text)
+            for p in range(1, int(i**0.5) + 1):  # use this to check faster
+                factor_list = self.factors(p)
+                if factor_list == [1, p]:
+                    self.primeset.add(p)
+                    self.primeDict[p] = 'Yes'
+                else:
+                    self.primeDict[p] = 'No'
 
-        self.primeset.add(i)
-        self.primeDict[i] = 'Yes'
-        return_text = '{} {} is prime'.format(self.primeDict[i], i)
+            for x in self.primeset:  # Just checks prime values of the number and if they divide
+                if i % x == 0:
+                    self.primeDict[i] = 'No'
 
-        return sorted(self.primeset)
+            #        return_text = '{} {} is not prime'.format(self.primeDict[i], i)
+            #        return return_text
+
+                    return False
+
+            self.primeset.add(i)
+            self.primeDict[i] = 'Yes'
+
+    #        return_text = '{} {} is prime'.format(self.primeDict[i], i)
+
+            return True
+
+    #        return return_text  # useful for testing one prime and not all beneath, same with below
+    #        return print(self.primeDict, '\n', sorted(self.primeset), '\n', return_text)
+
+        else:
+            for p in range(1, i + 1):  # use this for sns view
+                factor_list = self.factors(p)
+                if factor_list == [1, p]:
+                    self.primeset.add(p)
+                    self.primeDict[p] = 'Yes'
+                else:
+                    self.primeDict[p] = 'No'
+            return sorted(self.primeset)
 
 
-#        return return_text  # useful for testing one prime and not all beneath, same with below
-#        return print(self.primeDict, '\n', sorted(self.primeset), '\n', return_text)
 
-checker = PrimeChecker().PrimeCheck
-result = checker(10 ** 6)
-sns.histplot(data=result, bins=1)  # Shows primes within of result and their distributions
-plt.show()
+# checker = PrimeChecker().PrimeCheck
+# result = checker
+# print(result)
+# sns.histplot(data=result, bins=1)  # Shows primes within of result and their distributions
+# plt.show()
